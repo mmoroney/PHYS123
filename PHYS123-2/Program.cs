@@ -43,9 +43,8 @@ namespace PHYS123_2
         public static Assignment2Result EulerAlgorithm(double dt, double k, double m, double g, double h)
         {
             double t = 0;
-            double v = 0;
-
             double x = 0;
+            double v = 0;
             double a = g - k / m * x;
 
             while (x < h)
@@ -66,21 +65,20 @@ namespace PHYS123_2
         public static Assignment2Result FeynmanAlgorithm(double dt, double k, double m, double g, double h)
         {
             double t = 0;
-            double v = 0;
-
             double x = 0;
+            double v = 0;
             double a = g - k / m * x;
-            v -= a * dt / 2;
+            v += a * dt / 2;
 
             while (x < h)
             {
                 t += dt;
                 x += v * dt;
-                v += a * dt;
                 a = g - k / m * x;
+                v += a * dt;
             }
 
-            v += a * dt / 2;
+            v -= a * dt / 2;
 
             double tc = (x - h) / v;
             t -= tc;
