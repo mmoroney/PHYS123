@@ -1,0 +1,15 @@
+﻿Write BASIC programs using the Euler and Feynman algorithms to solve the following problem:
+
+  "A spring of force constant 10 N/m hangs vertically with its upper end
+   attached to a fixed support. A 1 kg block attached to the lower end is
+   released from rest with the spring initially unstretched at t=0. At what
+   time and with what velocity will the block strike a table 1.75 m below
+   its point of release?"
+
+Tabulate answers for a time steps of 0.01 and 0.005 sec, and use them to
+estimate more accurate vales under the assumption that errors vary as the
+square of the time step.
+
+Submit listings of your two programs along with output giving the time and
+velocity for each of the two time steps as well as the estimated more accurate
+values.
