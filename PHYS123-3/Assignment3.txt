@@ -1,0 +1,12 @@
+﻿Use the PLOT program to graph y(t) using the Euler and Feynman algorithms with
+a time step of 0.01 sec for the mass-spring system of Assignment No.2:
+
+  "A spring of force constant 10 N/m hangs vertically with its upper end
+    attached to a fixed support. A 1 kg block attached to the lower end is
+    released from rest with the spring initially unstretched at t=0.""
+
+Plot the two curves on the same graph for a time range from 0 to 6 seconds.
+(The table which was present in Assignment No.2 is no longer there.)
+
+Submit a listing of your modified PLOT program (NOT listed on the Multiwriter)
+as well as PrintScreen and High-Quality Multiwriter graphs.

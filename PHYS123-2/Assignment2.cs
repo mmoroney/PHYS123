@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PHYS123_2
 {
-    class Program
+    class Assignment2
     {
         static void Main(string[] args)
         {
@@ -66,9 +66,8 @@ namespace PHYS123_2
         {
             double t = 0;
             double x = 0;
-            double v = 0;
             double a = g - k / m * x;
-            v += a * dt / 2;
+            double v = a * dt / 2;
 
             while (x < h)
             {
