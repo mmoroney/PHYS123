@@ -27,31 +27,15 @@ namespace Chart
             Colors.Blue
         };
 
-        public static readonly DependencyProperty DataProperty =
-             DependencyProperty.Register("Data", typeof(IEnumerable<Point>[]),
-             typeof(Chart), new FrameworkPropertyMetadata(new IEnumerable<Point>[] { }));
-
-        public static readonly DependencyProperty XMinProperty =
-             DependencyProperty.Register("XMin", typeof(int),
-             typeof(Chart), new FrameworkPropertyMetadata(0));
-
-        public int XMin
-        {
-            get { return (int)GetValue(XMinProperty); }
-            set { SetValue(XMinProperty, value); }
-        }
-
+        public int XMin { get; set; }
         public int XMax { get; set; }
         public int YMin { get; set; }
         public int YMax { get; set; }
 
         public IEnumerable<Point>[] Data
         {
-            get { return (IEnumerable<Point>[])GetValue(DataProperty); }
             set
             {
-                SetValue(DataProperty, value);
-
                 for (int i = this.XMin + 1; i < this.XMax; i++)
                     this.AddLine(new Point(i, this.YMin), new Point(i, this.YMax));
 
@@ -60,10 +44,10 @@ namespace Chart
 
                 Matrix matrix = this.GetMatrix();
 
-                for (int i = 0; i < this.Data.Length; i++)
+                for (int i = 0; i < value.Length; i++)
                 {
                     PointCollection pointCollection = new PointCollection();
-                    foreach (Point point in this.Data[i])
+                    foreach (Point point in value[i])
                         pointCollection.Add(matrix.Transform(point));
 
                     Polyline polyLine = new Polyline();
