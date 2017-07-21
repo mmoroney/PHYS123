@@ -1,0 +1,14 @@
+﻿Write a BASIC program to READ or INPUT your data from the PHYS121L experiment
+"Determination of g with a linear air track" and store the data in a file on
+disk. (If you are not taking the lab or do not have your data available, sample
+data are available in file c:exp1.dat. The data consist of 5 values of time
+in seconds at each of 10 values of distance in meters.) You may store the data
+in a sequential file, a random file, or in a block saved by the BSAVE command.
+Sample programs C:SFILE.BAS, C:RFILE.BAS, and C:BLOCK.BAS illustrate the
+procedures needed to create and retrieve the three types of file.
+
+Write a second BASIC program to read the data from disk and print them in a
+table. Print a second table which lists the average and standard deviation of
+t^2, the square of the time, at each value of the distance.
+
+Submit listings of your programs along with the two tables.
