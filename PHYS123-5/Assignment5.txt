@@ -1,0 +1,13 @@
+﻿Using the data file you created in Assignment No.4,
+
+(1) Write a program to fit a least-squares line to the dependence of the mean
+    value of t^2 (Y) on d (X). Print the slope of the line, its intercept, and
+    the value of g calculated by setting the slope equal to 2L/gh (with L=2.29
+    m for the data in C:EXP1.DAT). Print also the standard deviation in t^2
+    given by the least-squares analysis. How does it compare with the values
+    you obtained in Assignment No.4?
+
+(2) Use the PLOT program to make a graph showing your t^2 versus d data and the
+    least-squares line determined in (1).
+
+Submit program listings, output, and the graph of t^2 versus d.

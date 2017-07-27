@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="Auto" Width="Auto">
     <Grid>
-        <Chart:Chart Name="Chart" Width="600" Height="400" XMin="0" XMax="6" YMin="-3" YMax="1"/>
+        <Chart:Chart Name="Chart" Width="600" Height="400" XMin="0" XMax="6" YMin="-3" YMax="1" NX ="6" NY="4"/>
         
     </Grid>
 </Window>

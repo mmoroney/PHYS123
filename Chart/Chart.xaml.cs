@@ -20,6 +20,10 @@ namespace Chart
     /// </summary>
     public partial class Chart : UserControl
     {
+        private IEnumerable<Point>[] data = new IEnumerable<Point>[] { };
+        private IEnumerable<Point> circles = new Point[] { };
+        private const int Radius = 12;
+
         private static Color[] colors = new Color[]
         {
             Colors.Red,
@@ -31,32 +35,67 @@ namespace Chart
         public int XMax { get; set; }
         public int YMin { get; set; }
         public int YMax { get; set; }
+        public int NX { get; set; }
+        public int NY { get; set; }
 
         public IEnumerable<Point>[] Data
         {
             set
             {
-                for (int i = this.XMin + 1; i < this.XMax; i++)
-                    this.AddLine(new Point(i, this.YMin), new Point(i, this.YMax));
+                this.data = value;
+                this.Redraw();
+            }
+        }
 
-                for (int i = this.YMin + 1; i < this.YMax; i++)
-                    this.AddLine(new Point(this.XMin, i), new Point(this.XMax, i));
+        public IEnumerable<Point> Circles
+        {
+            set
+            {
+                this.circles = value;
+                this.Redraw();
+            }
+        }
 
-                Matrix matrix = this.GetMatrix();
+        private void Redraw()
+        {
+            this.canvas.Children.Clear();
 
-                for (int i = 0; i < value.Length; i++)
-                {
-                    PointCollection pointCollection = new PointCollection();
-                    foreach (Point point in value[i])
-                        pointCollection.Add(matrix.Transform(point));
+            for (int i = 1; i < this.NX; i++)
+            {
+                double x = (this.XMax - this.XMin) * i / this.NX;
+                this.AddLine(new Point(x, this.YMin), new Point(x, this.YMax));
+            }
 
-                    Polyline polyLine = new Polyline();
-                    polyLine.Stroke = new SolidColorBrush(Chart.colors[i]);
+            for (int i = this.YMin + 1; i < this.YMax; i++)
+            {
+                double y = (this.YMax - this.YMin) * i / this.NY;
+                this.AddLine(new Point(this.XMin, y), new Point(this.XMax, y));
+            }
 
-                    polyLine.Points = pointCollection;
-                    this.canvas.Children.Add(polyLine);
-                }
+            Matrix matrix = this.GetMatrix();
 
+            for (int i = 0; i < this.data.Length; i++)
+            {
+                PointCollection pointCollection = new PointCollection();
+                foreach (Point point in this.data[i])
+                    pointCollection.Add(matrix.Transform(point));
+
+                Polyline polyLine = new Polyline();
+                polyLine.Stroke = new SolidColorBrush(Chart.colors[i]);
+
+                polyLine.Points = pointCollection;
+                this.canvas.Children.Add(polyLine);
+            }
+
+            foreach (Point point in this.circles)
+            {
+                Ellipse ellipse = new Ellipse { Width = Chart.Radius, Height = Chart.Radius };
+                Point transformed = matrix.Transform(point);
+                Canvas.SetLeft(ellipse, transformed.X - Chart.Radius / 2);
+                Canvas.SetTop(ellipse, transformed.Y - Chart.Radius / 2);
+                ellipse.Stroke = new SolidColorBrush(Colors.Black);
+                ellipse.StrokeThickness = 2;
+                this.canvas.Children.Add(ellipse);
             }
         }
 
