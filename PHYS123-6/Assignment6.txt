@@ -1,0 +1,16 @@
+﻿Solve the following problem by numerical integration:
+
+ "How much work is done in overcoming the earth's gravitational attraction when
+  an 80 kg astronaut is moved from the earth's surface (r = Re) out to an orbit
+  of radius r = 5 Re."
+
+1. Take g = 9.8 m/s^2, Re = 6.37 x 10^6 m, and write an expression for the work
+   done in the form of a dimensionless integral multiplied by a constant with
+   the dimensions of work.
+
+2. Evaluate the dimensionless integral using the trapezoid rule. Compare the
+   answer you obtain using 80 intervals with the result obtained by analytic
+   evaluation of the integral.
+
+3. By what factor is the 80-interval error reduced when (A(80)-A(40))/3 is used
+   as a correction?
