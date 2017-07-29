@@ -1,0 +1,10 @@
+﻿A simple pendulum consists of a mass M attached to the end of a light rod of
+length L the other end of which is attached to a smooth pivot. The period of
+oscillation of the pendulum is independent of amplitude at small amplitudes,
+but increases with amplitude at larger amplitudes.
+
+Use the numerical integration procedure for integrands of the (1/v) form to
+find the percentage by which the period has increased when the amplitude is
+(50 + nn) degrees where nn is the last two digits of your ID#. Evaluate the
+small amplitude period by using the small angle approximation for the cosine
+cos(z) = 1 - (z^2)/2.
