@@ -110,9 +110,9 @@ namespace Chart
             foreach(Point point in data.Points)
             {
                 Point transformed = matrix.Transform(point);
-                Ellipse ellipse = new Ellipse { Width = data.Radius, Height = data.Radius };
-                Canvas.SetLeft(ellipse, transformed.X - data.Radius / 2);
-                Canvas.SetTop(ellipse, transformed.Y - data.Radius / 2);
+                Ellipse ellipse = new Ellipse { Width = data.Radius * 2, Height = data.Radius * 2};
+                Canvas.SetLeft(ellipse, transformed.X - data.Radius);
+                Canvas.SetTop(ellipse, transformed.Y - data.Radius);
                 ellipse.Stroke = new SolidColorBrush(Colors.Black);
                 ellipse.StrokeThickness = 2;
                 this.canvas.Children.Add(ellipse);

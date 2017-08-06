@@ -1,0 +1,26 @@
+﻿Write a QuickBASIC program which makes use of the routines in the PLOT program
+to plot gravitational field lines and equipotentials:
+
+(1) Use the region from x=0 to x=8 and y=0 to y=6 as your plotting area.
+    There is a point mass of mass 3M at point x=2, y=3, and a point mass of
+    mass M at x=6, y=3. Set z7=1350 in the PLOT program to get a laser printer
+    graph with a 3 by 4 aspect ratio which matches your plotting area. Plot
+    circles at the point mass locations.
+
+(2) Structure your program into three major subroutines:
+     (a) A subroutine which plots a field line from a specified initial point
+         until it goes off scale. This subroutine will call the subroutine which
+         calculates the field.
+     (b) A subroutine which plots an equipotentual from a specified initial
+         point until it closes. This subroutine also will call the subroutine
+         which calculates the field.
+     (c) A subroutine which calculates the field ad x+dx/2, y+dy/2 due to the
+         presence of N point masses. The subroutine sums gx and gy over the
+         N masses and returns their values along with g=SQR(gx^2+gy^2) to the
+         calling program.
+
+(3) Plot 6 field lines originating (plot in the -g direction) from the point
+    mass at x=6, y=3, and the equipotential which passes through x=6.9 y=3.
+    (You may plot more field lines if you have time, but the pots take a
+    fairly long time to complete, so please be considerate if others are
+    waiting.)
