@@ -34,8 +34,8 @@ namespace PHYS123_5
                 new Point(this.Chart.XMax, result.LeastSquaresFitResult.Intercept + result.LeastSquaresFitResult.Slope * this.Chart.XMax)
             };
 
-            this.Chart.Data = new IEnumerable<Point>[] { points };
-            this.Chart.Circles = PHYS121L.Measurements.Select(m => new Point(m.Distance, m.TimeValues.Average(t => t * t))).ToArray();
+            this.Chart.AddLinePlot(points);
+            this.Chart.AddCirclePlot(PHYS121L.Measurements.Select(m => new Point(m.Distance, m.TimeValues.Average(t => t * t))), 12);
         }
     }
 }

@@ -20,8 +20,8 @@ namespace Chart
     /// </summary>
     public partial class Chart : UserControl
     {
-        private IEnumerable<Point>[] data = new IEnumerable<Point>[] { };
-        private IEnumerable<Point> circles = new Point[] { };
+        private List<IEnumerable<Point>> lines = new List<IEnumerable<Point>>();
+        private List<CirclePlotData> circles = new List<CirclePlotData>();
         private const int Radius = 12;
 
         private static Color[] colors = new Color[]
@@ -38,25 +38,35 @@ namespace Chart
         public int NX { get; set; }
         public int NY { get; set; }
 
-        public IEnumerable<Point>[] Data
+        public void AddLinePlot(IEnumerable<Point> points)
         {
-            set
-            {
-                this.data = value;
-                this.Redraw();
-            }
+            this.lines.Add(points);
         }
 
-        public IEnumerable<Point> Circles
+        public void AddCirclePlot(IEnumerable<Point> points, double radius)
         {
-            set
-            {
-                this.circles = value;
-                this.Redraw();
-            }
+            this.circles.Add(new CirclePlotData(points, radius));
         }
 
-        private void Redraw()
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            this.CreatePlots();
+            base.OnRender(drawingContext);
+        }
+
+        private Matrix GetMatrix()
+        {
+            double scaleX = this.Width / (this.XMax - this.XMin);
+            double scaleY = -this.Height / (this.YMax - this.YMin);
+            Matrix matrix = new Matrix();
+            matrix.Scale(scaleX, scaleY);
+            matrix.OffsetX = this.XMin * scaleX;
+            matrix.OffsetY = -this.YMax * scaleY;
+
+            return matrix;
+        }
+
+        private void CreatePlots()
         {
             this.canvas.Children.Clear();
 
@@ -72,43 +82,41 @@ namespace Chart
                 this.AddLine(new Point(this.XMin, y), new Point(this.XMax, y));
             }
 
+            for (int i = 0; i < this.lines.Count; i++)
+                AddLinePlot(this.lines[i], Chart.colors[i % Chart.colors.Length]);
+
+            for (int i = 0; i < this.circles.Count; i++)
+                AddCirclePlot(this.circles[i]);
+        }
+
+        private void AddLinePlot(IEnumerable<Point> points, Color color)
+        {
             Matrix matrix = this.GetMatrix();
 
-            for (int i = 0; i < this.data.Length; i++)
+            PointCollection pointCollection = new PointCollection();
+            foreach (Point point in points)
+                pointCollection.Add(matrix.Transform(point));
+
+            Polyline polyLine = new Polyline();
+            polyLine.Stroke = new SolidColorBrush(color);
+
+            polyLine.Points = pointCollection;
+            this.canvas.Children.Add(polyLine);
+        }
+
+        private void AddCirclePlot(CirclePlotData data)
+        {
+            Matrix matrix = this.GetMatrix();
+            foreach(Point point in data.Points)
             {
-                PointCollection pointCollection = new PointCollection();
-                foreach (Point point in this.data[i])
-                    pointCollection.Add(matrix.Transform(point));
-
-                Polyline polyLine = new Polyline();
-                polyLine.Stroke = new SolidColorBrush(Chart.colors[i]);
-
-                polyLine.Points = pointCollection;
-                this.canvas.Children.Add(polyLine);
-            }
-
-            foreach (Point point in this.circles)
-            {
-                Ellipse ellipse = new Ellipse { Width = Chart.Radius, Height = Chart.Radius };
                 Point transformed = matrix.Transform(point);
-                Canvas.SetLeft(ellipse, transformed.X - Chart.Radius / 2);
-                Canvas.SetTop(ellipse, transformed.Y - Chart.Radius / 2);
+                Ellipse ellipse = new Ellipse { Width = data.Radius, Height = data.Radius };
+                Canvas.SetLeft(ellipse, transformed.X - data.Radius / 2);
+                Canvas.SetTop(ellipse, transformed.Y - data.Radius / 2);
                 ellipse.Stroke = new SolidColorBrush(Colors.Black);
                 ellipse.StrokeThickness = 2;
                 this.canvas.Children.Add(ellipse);
             }
-        }
-
-        private Matrix GetMatrix()
-        {
-            double scaleX = this.Width / (this.XMax - this.XMin);
-            double scaleY = -this.Height / (this.YMax - this.YMin);
-            Matrix matrix = new Matrix();
-            matrix.Scale(scaleX, scaleY);
-            matrix.OffsetX = this.XMin * scaleX;
-            matrix.OffsetY = -this.YMax * scaleY;
-
-            return matrix;
         }
 
         private void AddLine(Point point1, Point point2)
@@ -131,6 +139,18 @@ namespace Chart
         public Chart()
         {
             InitializeComponent();
+        }
+
+        private class CirclePlotData
+        {
+            public IEnumerable<Point> Points { get; private set; }
+            public double Radius { get; private set; }
+
+            public CirclePlotData(IEnumerable<Point> points, double radius)
+            {
+                this.Points = points;
+                this.Radius = radius;
+            }
         }
     }
 }

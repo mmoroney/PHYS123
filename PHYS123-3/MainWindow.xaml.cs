@@ -30,14 +30,9 @@ namespace PHYS123_3
             double g = -9.8;
             double duration = 6;
 
-            IEnumerable<Point>[] data = new IEnumerable<Point>[]
-            {
-                Assignment3.Euler(dt, k, m, g, duration),
-                Assignment3.Feynman(dt, k, m, g, duration),
-                Assignment3.Analytic(dt, k, m, g, duration)
-            };
-
-            this.Chart.Data = data;
+            this.Chart.AddLinePlot(Assignment3.Euler(dt, k, m, g, duration));
+            this.Chart.AddLinePlot(Assignment3.Feynman(dt, k, m, g, duration));
+            this.Chart.AddLinePlot(Assignment3.Analytic(dt, k, m, g, duration));
         }
     }
 }
