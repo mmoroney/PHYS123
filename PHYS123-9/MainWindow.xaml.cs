@@ -30,7 +30,9 @@ namespace PHYS123_9
             double dz = 0.05;
             double v = 3;
 
-            this.Chart.AddLinePlot(Assignment9.BouncingBall(E1, v, dz, this.Chart.XMax, this.Chart.YMin, this.Chart.YMax));
+            for(int i = -1; i < 2; i++)
+                this.Chart.AddLinePlot(Assignment9.BouncingBall(E1 *(1 + 0.001 * i), v, dz, this.Chart.XMax, this.Chart.YMin, this.Chart.YMax));
+
             this.Chart.AddLinePlot(Assignment9.BouncingBall(E2, v, dz, this.Chart.XMax, this.Chart.YMin, this.Chart.YMax));
 
             this.textBlock.Text = string.Format("Ratio of E2/E1 is {0}", E2 / E1);
