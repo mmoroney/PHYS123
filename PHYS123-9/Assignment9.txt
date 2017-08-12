@@ -1,0 +1,16 @@
+﻿Use a QuickBASIC program with a Feynman algorithm to solve the dimensionless
+form of the bouncing ball Schrodinger equation, and use the routine in
+the PLOT program to graph the solution.
+
+(1) Have your program input trial values of the energy from the keyboard and
+    plot the solution from x=0 out to four times the distance to the turning
+    point. Vary the trial value of the energy to find values for which the
+    solution asymptotically approaches the axis. In this manner find the two
+    lowest-energy solutions. (The lowest-energy solution does not cross the
+    axis before the turning point.) What is the ratio E2/E1?
+
+(2) Plot the lowest-energy solution found in (1) out to four times the
+    turning point
+    (a) for the energy found in (1),
+    (b) for an energy 0.1% higher than the value in (a),
+    (c) for an energy 0.1% lower than the value in (a).
